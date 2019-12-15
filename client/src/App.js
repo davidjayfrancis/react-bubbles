@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/Login.js";
 import PrivateRoute from "./components/PrivateRoute.js";
 import BubblePage from "./components/BubblePage.js";
+import ColorList from "./components/ColorList";
 import "./styles.scss";
 
 function App() {

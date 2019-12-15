@@ -1,4 +1,10 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL } from "../actions";
+import {
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  UPDATE_COLOR_FAIL,
+  UPDATE_COLOR_SUCCESS
+} from "../actions";
 
 const initialState = {
   isLoading: false,
@@ -26,6 +32,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload
+      };
+    case UPDATE_COLOR_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload
       };
     default:
       return state;

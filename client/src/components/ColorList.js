@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { updateColor } from "../actions";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, ...props }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -21,6 +23,8 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+
+    props.updateColor(colorToEdit);
   };
 
   const deleteColor = color => {
@@ -34,12 +38,14 @@ const ColorList = ({ colors, updateColors }) => {
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
-              <span className="delete" onClick={e => {
-                    e.stopPropagation();
-                    deleteColor(color)
-                  }
-                }>
-                  x
+              <span
+                className="delete"
+                onClick={e => {
+                  e.stopPropagation();
+                  deleteColor(color);
+                }}
+              >
+                x
               </span>{" "}
               {color.color}
             </span>
@@ -86,4 +92,10 @@ const ColorList = ({ colors, updateColors }) => {
   );
 };
 
-export default ColorList;
+const mapStateToProps = state => {
+  return {
+    data: state.data
+  };
+};
+
+export default connect(mapStateToProps, { updateColor })(ColorList);
