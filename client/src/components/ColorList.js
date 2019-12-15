@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { updateColor } from "../actions";
+import { updateColor, deleteColor } from "../actions";
 
 const initialColor = {
   color: "",
@@ -29,6 +29,7 @@ const ColorList = ({ colors, updateColors, ...props }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    props.deleteColor(color);
   };
 
   return (
@@ -98,4 +99,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updateColor })(ColorList);
+export default connect(mapStateToProps, { updateColor, deleteColor })(
+  ColorList
+);
