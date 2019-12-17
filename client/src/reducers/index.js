@@ -6,7 +6,8 @@ import {
   UPDATE_COLOR_SUCCESS,
   DELETE_COLOR_START,
   DELETE_COLOR_FAIL,
-  DELETE_COLOR_SUCCESS
+  DELETE_COLOR_SUCCESS,
+  GET_COLORS_SUCCESS
 } from "../actions";
 
 const initialState = {
@@ -65,6 +66,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case GET_COLORS_SUCCESS:
+      return {
+        ...state,
+        data: action.payload
       };
     default:
       return state;

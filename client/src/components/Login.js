@@ -19,12 +19,12 @@ const Login = props => {
     });
   };
 
-  const waiter = cb => {};
-
   const handleSubmit = e => {
     e.preventDefault();
     // call login function here
-    props.login(creds, props.history);
+    props.login(creds, props.history).then(res => {
+      props.history.push("/bubbles");
+    });
 
     setCreds({
       username: "",

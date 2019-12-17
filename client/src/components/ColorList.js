@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { updateColor, deleteColor } from "../actions";
+import { updateColor, deleteColor, getColors } from "../actions";
 
 const initialColor = {
   color: "",
@@ -23,13 +23,16 @@ const ColorList = ({ colors, updateColors, ...props }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-
-    props.updateColor(colorToEdit);
+    props.updateColor(colorToEdit).then(res => {
+      props.getColors(updateColors);
+    });
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
-    props.deleteColor(color);
+    props.deleteColor(color).then(res => {
+      props.getColors(updateColors);
+    });
   };
 
   return (
@@ -99,6 +102,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updateColor, deleteColor })(
-  ColorList
-);
+export default connect(mapStateToProps, {
+  updateColor,
+  deleteColor,
+  getColors
+})(ColorList);
