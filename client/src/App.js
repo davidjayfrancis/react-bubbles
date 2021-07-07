@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Login from "./components/Login";
+import Login from "./components/Login.js";
+import PrivateRoute from "./components/PrivateRoute.js";
+import BubblePage from "./components/BubblePage.js";
+import ColorList from "./components/ColorList";
 import "./styles.scss";
 
 function App() {
@@ -9,10 +12,12 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/" component={Login} />
+        <Route path="/login" component={Login} />
         {/* 
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
+        <PrivateRoute exact path="/bubbles" component={BubblePage} />
       </div>
     </Router>
   );
